@@ -1,0 +1,48 @@
+{
+  "name": "@zhongyao/heatmap",
+  "version": "0.0.1",
+  "description": "A flexible and customizable React heatmap component for displaying year-based contribution calendars",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "scripts": {
+    "build:cjs": "tsc",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "build:umd": "tsc --module umd --outDir dist/umd",
+    "build:umd:min": "terser dist/umd/index.js --compress --mangle --output dist/umd/index.min.js",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:all": "npm run build && npm run build:umd && npm run build:umd:min"
+  },
+  "keywords": [
+    "react",
+    "heatmap",
+    "calendar",
+    "contribution",
+    "visualization",
+    "github-calendar",
+    "activity-calendar",
+    "year-view",
+    "typescript"
+  ],
+  "author": "PandaCure",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PandaCure/heatmap"
+  },
+  "bugs": {
+    "url": "https://github.com/PandaCure/heatmap/issues"
+  },
+  "homepage": "https://github.com/PandaCure/heatmap#readme",
+  "type": "commonjs",
+  "dependencies": {
+    "@types/react": "^19.2.2",
+    "dayjs": "^1.11.19",
+    "react": "^19.2.0",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "react": "^16.18.0",
+    "dayjs": "^1.11.19"
+  }
+}
