@@ -2,6 +2,8 @@
 
 A flexible and customizable React heatmap component for displaying year-based contribution calendars, similar to GitHub's contribution graph.
 
+![展示](./assets/image.png)
+
 ## Features
 
 - **Flexible Year Display**: Show any year's calendar in a heatmap format
