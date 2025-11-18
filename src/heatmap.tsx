@@ -81,6 +81,7 @@ export interface WeekdayLabelProps {
   /** 星期标签的布局。 */
   layout?: "left" | "center" | "right";
   style?: CSSProperties;
+  marginTop?: number;
 }
 
 /**
@@ -95,6 +96,7 @@ export interface MonthLabelProps {
   startCol: number;
   /** 此月份标签横跨的列数。 */
   span: number;
+  marginBottom?: number;
 }
 
 /**
@@ -135,6 +137,7 @@ export interface HeatmapProps {
   renderWeekday?: (props: WeekdayLabelProps) => React.ReactNode;
   weekDayLabelLayout?: "left" | "center" | "right";
   weekDayLabelStyle?: CSSProperties;
+  monthLabelMarginBottom?: number;
 }
 
 // --- [新] 默认渲染器 ---
@@ -166,11 +169,13 @@ const DefaultMonthLabel: React.FC<MonthLabelProps & { cellSize: number }> = ({
   label,
   span,
   cellSize,
+  marginBottom = 4,
 }) => (
   <div
     style={{
       gridColumn: `span ${span} / span ${span}`,
       height: cellSize, // 使用 cellSize 作为高度
+      marginBottom,
     }}
     // 'justify-start' 在视觉上通常比 'justify-center' 更好
     className="flex items-center justify-start text-xs text-gray-500"
@@ -182,7 +187,7 @@ const DefaultMonthLabel: React.FC<MonthLabelProps & { cellSize: number }> = ({
 /** 默认的星期标签渲染器 */
 const DefaultWeekdayLabel: React.FC<
   WeekdayLabelProps & { cellSize: number }
-> = ({ label, cellSize, layout, style }) => (
+> = ({ label, cellSize, layout, style, marginTop = 4 }) => (
   <div
     style={{
       height: cellSize,
@@ -192,6 +197,7 @@ const DefaultWeekdayLabel: React.FC<
           : layout === "right"
           ? "flex-end"
           : "flex-start",
+      marginTop,
       ...style,
     }} // 使用 cellSize
     className="flex items-center text-xs text-gray-500"
@@ -216,6 +222,7 @@ export const Heatmap: React.FC<HeatmapProps> = ({
   renderMonth,
   renderWeekday,
   weekDayLabelStyle,
+  monthLabelMarginBottom,
 }) => {
   // --- 配置（保持不变）---
   const config = useMemo(() => {
@@ -271,6 +278,7 @@ export const Heatmap: React.FC<HeatmapProps> = ({
                   cellSize={cellSize}
                   layout={weekDayLabelLayout}
                   style={weekDayLabelStyle}
+                  marginTop={monthLabelMarginBottom}
                 />
               )}
             </React.Fragment>
@@ -299,7 +307,11 @@ export const Heatmap: React.FC<HeatmapProps> = ({
                 {renderMonth ? (
                   renderMonth(props)
                 ) : (
-                  <DefaultMonthLabel {...props} cellSize={cellSize} />
+                  <DefaultMonthLabel
+                    {...props}
+                    cellSize={cellSize}
+                    marginBottom={monthLabelMarginBottom}
+                  />
                 )}
               </React.Fragment>
             );
