@@ -1,6 +1,6 @@
 {
   "name": "@zhongyao/heatmap",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "A flexible and customizable React heatmap component for displaying year-based contribution calendars",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",

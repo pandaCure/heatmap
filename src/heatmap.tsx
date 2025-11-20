@@ -81,6 +81,7 @@ export interface WeekdayLabelProps {
   /** 星期标签的布局。 */
   layout?: "left" | "center" | "right";
   style?: CSSProperties;
+  cellSize: number;
 }
 
 /**
@@ -181,9 +182,12 @@ const DefaultMonthLabel: React.FC<MonthLabelProps & { cellSize: number }> = ({
 );
 
 /** 默认的星期标签渲染器 */
-const DefaultWeekdayLabel: React.FC<
-  WeekdayLabelProps & { cellSize: number }
-> = ({ label, cellSize, layout, style }) => (
+const DefaultWeekdayLabel: React.FC<WeekdayLabelProps> = ({
+  label,
+  cellSize,
+  layout,
+  style,
+}) => (
   <div
     style={{
       height: cellSize,
@@ -261,7 +265,13 @@ export const Heatmap: React.FC<HeatmapProps> = ({
         <div style={{ height: cellSize + monthLabelMarginBottom }} />
 
         {config.labels.map((label, index) => {
-          const props: WeekdayLabelProps = { index, label };
+          const props: WeekdayLabelProps = {
+            index,
+            label,
+            cellSize,
+            layout: weekDayLabelLayout,
+            style: weekDayLabelStyle,
+          };
           // [新] 使用自定义渲染器（如果提供）
           return (
             <React.Fragment key={index}>
